@@ -1,0 +1,82 @@
+@startuml urbanstore
+' ----------
+' ViewModel
+' ----------
+' ----------
+'  ユーザー関連ViewModel
+' ----------
+class UserViewModel {
+    ' ログイン中のユーザー情報を保持するLiveDate
+    + userLiveData: LiveData<User?>
+    ' ログイン状態を示すLiveData
+    + loginState: LiveData<Boolean>
+    ' エラーメッセージを保持するLiveData
+    + errorMessage: LiveData<String?>
+    ' ユーザー状態のログイン処理を行い、成功またh失敗をLiveDataで通知
+    + login(email: String, password: String)
+    ' ユーザーログアウト処理を行い、ログイン状態を更新
+    + logout()
+    ' 新規ユーザーを登録する
+    + registerUser(user: User)
+    ' ユーザー情報を更新する
+    + updateUserDetails(user: User)
+}
+' ----------
+' 商品関連ViewModel
+' ----------
+class ProductViewModel {
+    ' 商品リストを保持するLiveData
+    productListLiveData: LiveData<List<Product>>
+    ' 選択された商品の詳細を保持するLiveData
+    selectedProductLiveData: LiveData<Product?>
+    ' エラーメッセージを保持するLiveData
+    errorMessage: LiveData<String?>
+    ' 商品リストを取得し、LiveDataに更新
+    fetchProductList()
+    ' 指定された商品IDに基づき、商品詳細を取得してLiveDataに更新
+    selectProduct(productId: String)
+    ' 検索クエリに基づき、商品をフィルタリング
+    searchProducts(query: String)
+}
+' ----------
+' ログアウト画面
+' ----------
+class UserRegistrationScreen
+' ----------
+' ホーム画面
+' ----------
+class HomeScreen
+' ----------
+' 商品詳細表示画面
+' ----------
+class ItemDetailScreen
+' ----------
+' 商品検索機能画面
+' ----------
+class ProductSearchFunctionScreen
+' ----------
+' カート管理画面
+' ----------
+class CartManagementScreen
+' ----------
+' 購入手続き画面
+' ----------
+class PurchaseProcedureScreen
+' ----------
+' カート管理画面
+' ----------
+class CartManagementScreen
+' ----------
+' 購入手続き画面
+' ----------
+class PurchaseProcedureScreen
+' ----------
+' 注文履歴表示画面
+' ----------
+class OrderHistoryDisplayScreen
+' ----------
+' 注文詳細表示画面
+' ----------
+class OrderDetailDisplayScreen
+
+@enduml

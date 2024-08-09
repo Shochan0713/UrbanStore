@@ -1,0 +1,195 @@
+@startuml urbanstore
+' ----------
+' Model
+' ----------
+' ----------
+' ユーザー関連クラス
+' ----------
+' ----------
+' ユーザークラス
+' ----------
+class User {
+    ' ユーザーID
+    + id : String
+    ' ユーザー名
+    + name : String
+    ' メールアドレス
+    + email : String
+    ' ハッシュ化されたメールアドレス
+    + passwordHash: String
+    ' ユーザーの住所情報
+    + adress : Address
+    ' 電話番号
+    + phoneNumber : String
+    ' パスワードのベリデータション
+    + isPasswordValid(String password):Boolean
+}
+' ----------
+' アドレスクラス
+' ----------
+class Address {
+    ' 通り名
+    + street: String
+    ' 市区町村名
+    + city : String
+    ' 都道府県
+    + state : String
+    ' 郵便番号
+    + postalCode : String
+    ' 国
+    + country : String
+}
+' ----------
+' 商品関連クラス
+' ----------
+' ----------
+' Product
+' ----------
+class Product {
+    ' 商品ID
+    + id : String
+    ' 商品名
+    + name : String
+    ' 商品の説明
+    + description : String
+    ' 商品の価格
+    + price : Double
+    ' 商品画像のURL
+    + imageUrl : String
+    ' 商品カテゴリ
+    + stockQuantity :Int
+    ' 在庫チェック
+    + isInStock() : int
+}
+' ----------
+' 商品カテゴリ Enum
+' ----------
+enum ProductCategory {
+    ' カテゴリID
+    + id : String
+    ' カテゴリ名
+    + name : String
+    ' メソッド
+    + someMethode()
+}
+' ----------
+' 注文関連クラス
+' ----------
+' ----------
+' 注文に関する情報クラス
+' ----------
+class Order {
+    ' 注文ID
+    + id : String
+    ' 注文を行ったユーザー
+    + user : User
+    ' 注文商品リスト
+    + item :　List<OrderItem>
+    ' 注文の総額
+    + totalAmount : double
+    ' 注文ステータス
+    + status : OrderStatus
+    ' 注文日
+    + orderDate :Date
+    ' 総額計算メソッド
+    + calculateTotalAmount() :Double
+}
+' ----------
+' 注文内の各商品を表すクラス
+' ----------
+class OrderItem{
+    ' 注文した商品
+    + product : Product
+    ' 注文数量
+    + quantity : Int
+    ' 購入時の価格
+    + priceAtPurcase : Double
+}
+' ----------
+' 注文の状態を表すEnum
+' ----------
+enum OrderStatus {
+    ' 処理中
+    PENDING
+    ' 発送済み
+    SHIPED
+    ' 配送済み
+    DELIVRED
+    ' キャンセル済み
+    CANCELLED
+}
+' ----------
+' カード関連クラス
+' ----------
+' ----------
+' カード情報を表すクラス
+' ----------
+class Cart {
+    ' カードの所有者
+    + user : User
+    ' カート内の商品リスト
+    + items : List<CartItem>
+    ' カード内の商品総額
+    + totalAmount : double
+    ' 商品をカードに追加する
+    + addItem(product Product,quantity Item)
+    ' カードから商品を削除する
+    + removeItem(product Product)
+    ' カート内の総額を計算する
+    + calculateTotalAmount() :Double
+
+}
+' ----------
+' カート内の各商品を表すクラス。
+' ----------
+class CartItem {
+    ' カートに入れた商品
+    + product: Product
+    ' 数量
+    + quantity: Int
+    ' 商品ごとの総額を計算する
+    + calculateItemTotal(): Double
+}
+' ----------
+' その他クラス
+' ----------
+class Payment {
+    ' 支払いID
+    + id : String
+    ' 対象の注文
+    + order : Order
+    ' 支払い金額
+    + amaount :Double
+    ' 支払い方法
+    + paymentMethod : PaymentMethod
+    ' 支払いステータス
+    + status : PaymentStatus
+    ' 支払い処理を行う
+    + processPayment()
+}
+' ----------
+' 注文詳細表示画面
+' ----------
+enum PaymentMethod {
+    ' クレジットカード
+    CREDIT_CARD
+    ' Paypal
+    PAYPAL
+    ' 銀行振込
+    BANK_TRANSFER
+
+}
+' ----------
+' 注文詳細表示画面
+' ----------
+enum PaymentMethod {
+    ' 支払い待ち
+    PENDING
+    ' 支払い完了
+    COMPLETED
+    ' 支払い失敗
+    FAILED
+
+}
+
+@enduml
