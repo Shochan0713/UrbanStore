@@ -13,7 +13,13 @@ class UserViewModel extends ChangeNotifier {
   void login(String email, String password) {
     // ログイン処理のロジックをここに実装します
     // 成功した場合:
-    _user = User(id: ''); // 仮のユーザー情報
+    _user = User(
+        id: '',
+        name: '',
+        email: '',
+        passwordHash: '',
+        address: null,
+        phoneNumber: ''); // 仮のユーザー情報
     _loginState = true;
     _errorMessage = null;
     notifyListeners();

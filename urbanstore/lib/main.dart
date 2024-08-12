@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urbanstore/home/home_page.dart';
+import 'package:urbanstore/view/user_management/LoginScreen.dart';
 
 void main() {
   runApp(const UrbanStore());
@@ -16,7 +17,7 @@ class UrbanStore extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: LoginScreen(),
     );
   }
 }

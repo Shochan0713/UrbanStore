@@ -26,7 +26,7 @@ class OrderViewModel extends ChangeNotifier {
               name: '',
               email: '',
               passwordHash: '',
-              address: 'abc',
+              address: null,
               phoneNumber: ''),
           items: [],
           totalAmount: 0,
