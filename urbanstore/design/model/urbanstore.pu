@@ -10,17 +10,17 @@
 ' ----------
 class User {
     ' ユーザーID
-    + id : String
+    - id : String
     ' ユーザー名
-    + name : String
+    - name : String
     ' メールアドレス
-    + email : String
+    - email : String
     ' ハッシュ化されたメールアドレス
-    + passwordHash: String
+    - passwordHash: String
     ' ユーザーの住所情報
-    + adress : Address
+    - adress : Address
     ' 電話番号
-    + phoneNumber : String
+    - phoneNumber : String
     ' パスワードのベリデータション
     + isPasswordValid(String password):Boolean
 }
@@ -29,15 +29,15 @@ class User {
 ' ----------
 class Address {
     ' 通り名
-    + street: String
+    - street: String
     ' 市区町村名
-    + city : String
+    - city : String
     ' 都道府県
-    + state : String
+    - state : String
     ' 郵便番号
-    + postalCode : String
+    - postalCode : String
     ' 国
-    + country : String
+    - country : String
 }
 ' ----------
 ' 商品関連クラス
@@ -47,30 +47,30 @@ class Address {
 ' ----------
 class Product {
     ' 商品ID
-    + id : String
+    - id : String
     ' 商品名
-    + name : String
+    - name : String
     ' 商品の説明
-    + description : String
+    - description : String
     ' 商品の価格
-    + price : Double
+    - price : Double
     ' 商品画像のURL
-    + imageUrl : String
+    - imageUrl : String
     ' 商品カテゴリ
-    + stockQuantity :Int
+    - stockQuantity :Int
     ' 在庫チェック
-    + isInStock() : int
+    + isInStock() : Boolean
 }
 ' ----------
 ' 商品カテゴリ Enum
 ' ----------
 enum ProductCategory {
-    ' カテゴリID
-    + id : String
-    ' カテゴリ名
-    + name : String
-    ' メソッド
-    + someMethode()
+    ' 電化製品
+    + electronics
+    ' 服
+    + clothing
+    ' 家庭用品
+    + homeGoods
 }
 ' ----------
 ' 注文関連クラス
@@ -80,17 +80,17 @@ enum ProductCategory {
 ' ----------
 class Order {
     ' 注文ID
-    + id : String
+    - id : String
     ' 注文を行ったユーザー
-    + user : User
+    - user : User
     ' 注文商品リスト
-    + item :　List<OrderItem>
+    - item :　List<OrderItem>
     ' 注文の総額
-    + totalAmount : double
+    - totalAmount : double
     ' 注文ステータス
-    + status : OrderStatus
+    - status : OrderStatus
     ' 注文日
-    + orderDate :Date
+    - orderDate :Date
     ' 総額計算メソッド
     + calculateTotalAmount() :Double
 }
@@ -126,17 +126,21 @@ enum OrderStatus {
 ' ----------
 class Cart {
     ' カードの所有者
-    + user : User
+    - user : User
     ' カート内の商品リスト
-    + items : List<CartItem>
+    - items : List<CartItem>
     ' カード内の商品総額
-    + totalAmount : double
+    - totalAmount : double
     ' 商品をカードに追加する
-    + addItem(product Product,quantity Item)
+    - addItem(product Product,quantity Item)
     ' カードから商品を削除する
-    + removeItem(product Product)
+    - removeItem(product Product)
     ' カート内の総額を計算する
     + calculateTotalAmount() :Double
+    ' 商品がカートに存在しない場合は0を返す
+    + getQuantity() : Int
+    ' カートのアイテムをクリア
+    + clear() : Void
 
 }
 ' ----------
@@ -144,9 +148,9 @@ class Cart {
 ' ----------
 class CartItem {
     ' カートに入れた商品
-    + product: Product
+    - product: Product
     ' 数量
-    + quantity: Int
+    - quantity: Int
     ' 商品ごとの総額を計算する
     + calculateItemTotal(): Double
 }
@@ -155,15 +159,15 @@ class CartItem {
 ' ----------
 class Payment {
     ' 支払いID
-    + id : String
+    - id : String
     ' 対象の注文
-    + order : Order
+    - order : Order
     ' 支払い金額
-    + amaount :Double
+    - amaount :Double
     ' 支払い方法
-    + paymentMethod : PaymentMethod
+    - paymentMethod : PaymentMethod
     ' 支払いステータス
-    + status : PaymentStatus
+    - status : PaymentStatus
     ' 支払い処理を行う
     + processPayment()
 }
@@ -182,7 +186,7 @@ enum PaymentMethod {
 ' ----------
 ' 注文詳細表示画面
 ' ----------
-enum PaymentMethod {
+enum PaymentStatus {
     ' 支払い待ち
     PENDING
     ' 支払い完了

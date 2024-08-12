@@ -3,80 +3,91 @@
 ' ViewModel
 ' ----------
 ' ----------
-'  ユーザー関連ViewModel
+' ユーザー関連ViewModel
 ' ----------
 class UserViewModel {
-    ' ログイン中のユーザー情報を保持するLiveDate
-    + userLiveData: LiveData<User?>
-    ' ログイン状態を示すLiveData
-    + loginState: LiveData<Boolean>
-    ' エラーメッセージを保持するLiveData
-    + errorMessage: LiveData<String?>
-    ' ユーザー状態のログイン処理を行い、成功またh失敗をLiveDataで通知
-    + login(email: String, password: String)
+    ' ログイン中のユーザー情報を保持するValueNotifier
+    + userNotifier: ValueNotifier<User?>
+    ' ログイン状態を示すValueNotifier
+    + loginStateNotifier: ValueNotifier<bool>
+    ' エラーメッセージを保持するValueNotifier
+    + errorNotifier: ValueNotifier<String?>
+    ' ユーザー状態のログイン処理を行い、成功または失敗をValueNotifierで通知
+    + login(String email, String password)
     ' ユーザーログアウト処理を行い、ログイン状態を更新
     + logout()
     ' 新規ユーザーを登録する
-    + registerUser(user: User)
+    + registerUser(User user)
     ' ユーザー情報を更新する
-    + updateUserDetails(user: User)
+    + updateUserDetails(User user)
 }
 ' ----------
 ' 商品関連ViewModel
 ' ----------
 class ProductViewModel {
-    ' 商品リストを保持するLiveData
-    productListLiveData: LiveData<List<Product>>
-    ' 選択された商品の詳細を保持するLiveData
-    selectedProductLiveData: LiveData<Product?>
-    ' エラーメッセージを保持するLiveData
-    errorMessage: LiveData<String?>
-    ' 商品リストを取得し、LiveDataに更新
-    fetchProductList()
-    ' 指定された商品IDに基づき、商品詳細を取得してLiveDataに更新
-    selectProduct(productId: String)
+    ' 商品リストを保持するValueNotifier
+    + productListNotifier: ValueNotifier<List<Product>>
+    ' 選択された商品の詳細を保持するValueNotifier
+    + selectedProductNotifier: ValueNotifier<Product?>
+    ' エラーメッセージを保持するValueNotifier
+    + errorNotifier: ValueNotifier<String?>
+    ' 商品リストを取得し、ValueNotifierに更新
+    + fetchProductList()
+    ' 指定された商品IDに基づき、商品詳細を取得してValueNotifierに更新
+    + selectProduct(String productId)
     ' 検索クエリに基づき、商品をフィルタリング
-    searchProducts(query: String)
+    + searchProducts(String query)
 }
 ' ----------
-' ログアウト画面
+' 注文関連ViewModel
 ' ----------
-class UserRegistrationScreen
+class OrderViewModel {
+    ' ユーザーの注文リストを保持するValueNotifier
+    + orderListNotifier: ValueNotifier<List<Order>>
+    ' 選択された注文の詳細を保持するValueNotifier 
+    + selectedOrderNotifier: ValueNotifier<Order?>
+    ' 注文ステータスを保持するValueNotifier 
+    + orderStatusNotifier: ValueNotifier<OrderStatus?>
+    ' エラーメッセージを保持するValueNotifier
+    + errorNotifier: ValueNotifier<String?>
+    ' 指定されたユーザーIDに基づき、注文リストを取得 
+    + fetchOrderList(String userId)
+    ' カートの内容に基づき、注文を確定
+    + placeOrder(Cart cart)
+    ' 指定された注文をキャンセルし、ステータスを更新
+    + cancelOrder(String orderId)
+}
 ' ----------
-' ホーム画面
+' カート関連ViewModel
 ' ----------
-class HomeScreen
+class CartViewModel {
+    ' ユーザーのカート情報を保持するValueNotifier
+    + cartNotifier: ValueNotifier<Cart?>
+    ' カート内の総額を保持するValueNotifier
+    + totalAmountNotifier: ValueNotifier<double>
+    ' エラーメッセージを保持するValueNotifier
+    + errorNotifier: ValueNotifier<String?>
+    ' 指定された商品をカートに追加
+    + addItemToCart(Product product, int quantity)
+    ' カートから指定された商品を削除
+    + removeItemFromCart(Product product)
+    ' カートをクリア
+    + clearCart()
+    ' カート内の商品を注文処理に進む
+    + checkout()
+}
 ' ----------
-' 商品詳細表示画面
+' 支払い関連ViewModel
 ' ----------
-class ItemDetailScreen
-' ----------
-' 商品検索機能画面
-' ----------
-class ProductSearchFunctionScreen
-' ----------
-' カート管理画面
-' ----------
-class CartManagementScreen
-' ----------
-' 購入手続き画面
-' ----------
-class PurchaseProcedureScreen
-' ----------
-' カート管理画面
-' ----------
-class CartManagementScreen
-' ----------
-' 購入手続き画面
-' ----------
-class PurchaseProcedureScreen
-' ----------
-' 注文履歴表示画面
-' ----------
-class OrderHistoryDisplayScreen
-' ----------
-' 注文詳細表示画面
-' ----------
-class OrderDetailDisplayScreen
+class PaymentViewModel {
+    ' 支払いステータスを保持するValueNotifier
+    + paymentStatusNotifier: ValueNotifier<PaymentStatus?>
+    ' エラーメッセージを保持するValueNotifier
+    + errorNotifier: ValueNotifier<String?>
+    ' 指定された支払い方法で支払い処理を行う
+    + processPayment(Order order, PaymentMethod paymentMethod)
+    ' 指定された注文IDに基づき、支払いステータスを取得
+    + fetchPaymentStatus(String orderId)
+}
 
 @enduml
