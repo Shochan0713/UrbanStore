@@ -28,16 +28,12 @@ class User {
 ' アドレスクラス
 ' ----------
 class Address {
-    ' 通り名
-    - street: String
     ' 市区町村名
     - city : String
     ' 都道府県
     - state : String
     ' 郵便番号
     - postalCode : String
-    ' 国
-    - country : String
 }
 ' ----------
 ' 商品関連クラス

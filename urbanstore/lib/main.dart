@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:urbanstore/home/home_page.dart';
 import 'package:urbanstore/view/user_management/LoginScreen.dart';
 
 void main() {
