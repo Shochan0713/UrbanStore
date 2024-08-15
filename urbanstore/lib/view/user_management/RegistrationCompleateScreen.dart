@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class Registrationcompleatescreen extends StatelessWidget {
   const Registrationcompleatescreen({super.key});
@@ -17,6 +18,7 @@ class Registrationcompleatescreen extends StatelessWidget {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

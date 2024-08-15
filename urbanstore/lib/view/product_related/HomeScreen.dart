@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:urbanstore/model/cart.dart';
 import 'package:urbanstore/model/product.dart';
 import 'package:urbanstore/model/product_list.dart';
 import 'package:urbanstore/view/product_related/ItemDetailScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -15,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Product> productList = productListTest;
   int currentPage = 0;
   final int itemsPerPage = 16;
+  final cart = Cart();
   @override
   Widget build(BuildContext context) {
     final int startIndex = currentPage * itemsPerPage;
@@ -33,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,8 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  Itemdetailscreen(productId: product.id)));
+                              builder: (context) => Itemdetailscreen(
+                                  productId: product.id, cart: cart)));
                     },
                     child: Card(
                       child: Column(

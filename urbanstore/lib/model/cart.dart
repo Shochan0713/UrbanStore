@@ -1,38 +1,51 @@
 import 'package:urbanstore/model/cart_item.dart';
 import 'package:urbanstore/model/product.dart';
-import 'package:urbanstore/model/user_info.dart';
 
 class Cart {
-  final UserInfo user;
-  final List<CartItem> items;
+  static final Cart _instance = Cart._internal();
 
-  Cart({
-    required this.user,
-    required this.items,
-  });
+  final List<CartItem> _items = [];
 
-  double calculateTotalAmount() {
-    return items.fold(0.0, (sum, item) => sum + item.calculateItemTotal());
+  // プライベートコンストラクタ
+  Cart._internal();
+
+  // シングルトンインスタンスを取得するためのファクトリコンストラクタ
+  factory Cart() {
+    return _instance;
   }
 
-  void addItem(Product product, int quantity) {
-    // 商品をカートに追加するロジック
-  }
+  // カート内の商品を取得
+  List<CartItem> get items => _items;
 
-  void removeItem(Product product) {
-    // 商品をカートから削除するロジック
-  }
+  // カートに商品を追加する
+  void addToCart(Product product) {
+    final existingItem = _items.firstWhere(
+        (item) => item.product.id == product.id,
+        orElse: () => CartItem(product: product));
 
-  int getQuantity(Product product) {
-    for (CartItem item in items) {
-      if (item.product == product) {
-        return item.quantity;
-      }
+    if (!_items.contains(existingItem)) {
+      _items.add(existingItem);
+    } else {
+      existingItem.quantity++;
     }
-    return 0; // 商品がカートに存在しない場合は0を返す
   }
 
-  void clear() {
-    items.clear();
+  // カートから商品を削除する
+  void removeFromCart(Product product) {
+    final existingItem = _items.firstWhere(
+        (item) => item.product.id == product.id,
+        orElse: () => CartItem(product: product));
+
+    if (existingItem.quantity > 1) {
+      existingItem.quantity--;
+    } else {
+      _items.remove(existingItem);
+    }
+  }
+
+  // カート内の商品合計金額を計算する
+  double get totalPrice {
+    return _items.fold(0,
+        (total, current) => total + current.product.price * current.quantity);
   }
 }

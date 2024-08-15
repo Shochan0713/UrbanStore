@@ -5,8 +5,8 @@ import 'package:urbanstore/view/product_related/HomeScreen.dart'; // 自作の H
 import 'package:urbanstore/view/user_management/LoginScreen.dart'; // 自作の LoginScreen のインポート
 import 'package:urbanstore/view/user_management/UserInfoRegistration.dart'; // 自作の UserInfoRegistration のインポート
 import 'package:urbanstore/viewmodel/common/app_bar.dart'; // 自作の CustomAppBar のインポート
-import 'package:urbanstore/model/user_info.dart'
-    as my_user_info; // `UserInfo` を `my_user_info` という名前でインポート
+import 'package:urbanstore/model/user_info.dart' as my_user_info;
+import 'package:urbanstore/viewmodel/common/drawer.dart'; // `UserInfo` を `my_user_info` という名前でインポート
 
 class Userinfo extends StatefulWidget {
   const Userinfo({super.key});
@@ -73,6 +73,7 @@ class _UserinfoState extends State<Userinfo> {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: _loading

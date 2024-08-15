@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/view/user_management/RegistrationCompleateScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class UserRegistrationScreen extends StatefulWidget {
   UserRegistrationScreen({super.key});
@@ -13,13 +12,9 @@ class UserRegistrationScreen extends StatefulWidget {
 }
 
 class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
-  bool _showTextFields = false;
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String _email = '';
-  String _password = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +27,7 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -43,9 +39,6 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                   labelText: 'メールアドレス',
                   border: OutlineInputBorder(),
                 ),
-                // onChanged: (value) {
-                //   _email = value;
-                // },
               ),
               const SizedBox(
                 height: 20.0,
@@ -56,9 +49,6 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                   labelText: 'パスワード',
                   border: OutlineInputBorder(),
                 ),
-                // onChanged: (value) {
-                //   _password = value;
-                // },
               ),
               const SizedBox(
                 height: 20.0,

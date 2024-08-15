@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/view/user_management/UserRegistrationScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -23,28 +23,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(padding: EdgeInsets.zero, children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.cyan[200]),
-            child: Text('メニュー'),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('ホーム'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('設定'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ]),
-      ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

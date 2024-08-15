@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/address.dart';
 import 'package:urbanstore/model/user_info.dart' as user_model;
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class Userinforegistrationscreen extends StatefulWidget {
   const Userinforegistrationscreen({super.key});
@@ -81,6 +82,7 @@ class _UserinforegistrationscreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('ユーザー情報登録')),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(

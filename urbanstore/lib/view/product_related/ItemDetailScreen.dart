@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:urbanstore/model/cart.dart';
 import 'package:urbanstore/model/product.dart';
 import 'package:urbanstore/model/product_list.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class Itemdetailscreen extends StatelessWidget {
   final String productId;
-
-  Itemdetailscreen({super.key, required this.productId});
+  final Cart cart;
+  Itemdetailscreen({super.key, required this.productId, required this.cart});
   final List<Product> productList = productListTest;
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class Itemdetailscreen extends StatelessWidget {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -52,13 +55,26 @@ class Itemdetailscreen extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              child: const Text('Button'),
+              child: const Text('戻る'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
               ),
               onPressed: () {
                 Navigator.pop(context);
+              },
+            ),
+            ElevatedButton(
+              child: const Text('カートに追加'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                cart.addToCart(product);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('${product.name} がカートに追加されました。'),
+                ));
               },
             ),
           ],
