@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:urbanstore/model/oder_status.dart';
 import 'package:urbanstore/model/order.dart';
 import 'package:urbanstore/model/cart.dart';
-import 'package:urbanstore/model/user.dart';
+import 'package:urbanstore/model/user_info.dart';
 
 class OrderViewModel extends ChangeNotifier {
   List<Order> _orderList = [];
@@ -21,7 +21,7 @@ class OrderViewModel extends ChangeNotifier {
     _orderList = [
       Order(
           id: '1',
-          user: User(
+          user: UserInfo(
               id: userId,
               name: '',
               email: '',

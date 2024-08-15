@@ -1,10 +1,10 @@
 import 'package:urbanstore/model/oder_item.dart';
 import 'package:urbanstore/model/oder_status.dart';
-import 'package:urbanstore/model/user.dart';
+import 'package:urbanstore/model/user_info.dart';
 
 class Order {
   final String id;
-  final User user;
+  final UserInfo user;
   final List<OrderItem> items;
   final double? totalAmount;
   final OrderStatus status;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "756260024222",
+    "project_id": "urbanstore-86068",
+    "storage_bucket": "urbanstore-86068.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756260024222:android:040934a4d2f96bfb74708f",
+        "android_client_info": {
+          "package_name": "com.example.urbanstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5hgmBX3XptEDhE4bXpnQDiI3xc-FqBPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/view/user_management/RegistrationCompleateScreen.dart';
@@ -15,6 +17,9 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  String _email = '';
+  String _password = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,93 +37,31 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: <Widget>[
-              TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'パスワード',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              TextField(
+              TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
                   labelText: 'メールアドレス',
                   border: OutlineInputBorder(),
                 ),
+                // onChanged: (value) {
+                //   _email = value;
+                // },
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              TextField(
+              TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(
                   labelText: 'パスワード',
                   border: OutlineInputBorder(),
                 ),
+                // onChanged: (value) {
+                //   _password = value;
+                // },
               ),
               const SizedBox(
                 height: 20.0,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _showTextFields = !_showTextFields;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.cyan[300],
-                  foregroundColor: Colors.black,
-                ),
-                child: const Text('アドレス入力'),
-              ),
-              Visibility(
-                  visible: _showTextFields,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      TextField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          labelText: '郵便番号',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      TextField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          labelText: '都道府県',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      TextField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          labelText: '市区町村名',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ],
-                  )),
-              const SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: '電話番号',
-                  border: OutlineInputBorder(),
-                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -129,13 +72,24 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                   ),
                 ),
                 child: const Text('ユーザー登録'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Registrationcompleatescreen(),
-                    ),
-                  );
+                onPressed: () async {
+                  try {
+                    final User? user = (await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: _emailController.text,
+                                password: _passwordController.text))
+                        .user;
+                    if (user != null)
+                      print("ユーザー登録しました${user.email} , ${user.uid}");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Registrationcompleatescreen(),
+                      ),
+                    );
+                  } catch (e) {
+                    print("エラー: $e");
+                  }
                 },
               ),
             ],

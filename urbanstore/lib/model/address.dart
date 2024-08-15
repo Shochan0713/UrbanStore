@@ -12,4 +12,25 @@ class Address {
     required this.postalCode,
     required this.country,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'street': street,
+      'city': city,
+      'state': state,
+      'postalCode': postalCode,
+      'country': country,
+    };
+  }
+
+  // fromMap メソッド
+  static Address fromMap(Map<String, dynamic> map) {
+    return Address(
+      street: map['street'],
+      city: map['city'],
+      state: map['state'],
+      postalCode: map['postalCode'],
+      country: map['country'],
+    );
+  }
 }

@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/view/user_management/UserRegistrationScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
 
@@ -46,7 +49,7 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            TextField(
+            TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'メールアドレス',
@@ -55,7 +58,7 @@ class LoginScreen extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            TextFormField(
               controller: _passwordController,
               decoration: const InputDecoration(
                 labelText: 'パスワード',
@@ -65,11 +68,24 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                // ログイン処理をここで実行
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                // Login logic here
+              onPressed: () async {
+                try {
+                  final User? user = (await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: _emailController.text,
+                              password: _passwordController.text))
+                      .user;
+                  if (user != null)
+                    print("ログインしました　${user.email} , ${user.uid}");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                } catch (e) {
+                  print(e);
+                }
               },
               child: const Text('ログイン'),
             ),

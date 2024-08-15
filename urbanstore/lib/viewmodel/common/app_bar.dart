@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:urbanstore/view/user_management/UserInfo.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   final String title;
@@ -17,7 +18,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
       title: Center(
           child: Text(title, style: TextStyle(fontWeight: FontWeight.bold))),
       // actions: actions,
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.person))],
+      actions: [
+        IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Userinfo(),
+                ),
+              );
+            },
+            icon: Icon(Icons.person))
+      ],
       backgroundColor: Colors.cyan,
     );
   }

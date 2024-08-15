@@ -1,9 +1,9 @@
 import 'package:urbanstore/model/cart_item.dart';
 import 'package:urbanstore/model/product.dart';
-import 'package:urbanstore/model/user.dart';
+import 'package:urbanstore/model/user_info.dart';
 
 class Cart {
-  final User user;
+  final UserInfo user;
   final List<CartItem> items;
 
   Cart({
