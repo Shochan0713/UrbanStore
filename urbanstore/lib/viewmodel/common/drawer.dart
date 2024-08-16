@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:urbanstore/model/cart.dart';
+import 'package:urbanstore/view/cart_purchase_related/CartManagementScreen.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/view/product_related/ProductSearchFunctionScreen.dart';
 
@@ -35,6 +37,20 @@ class CustomDrawer extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => const Productsearchfunctionscreen(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.shopping_cart),
+          title: const Text('カート'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Cartmanagementscreen(
+                  cart: Cart(),
+                ),
               ),
             );
           },

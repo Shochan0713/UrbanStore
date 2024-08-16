@@ -20,11 +20,12 @@ class Cart {
   // カートに商品を追加する
   void addToCart(Product product) {
     final existingItem = _items.firstWhere(
-        (item) => item.product.id == product.id,
-        orElse: () => CartItem(product: product));
+      (item) => item.product.id == product.id,
+      orElse: () => CartItem(product: product, quantity: 0),
+    );
 
-    if (!_items.contains(existingItem)) {
-      _items.add(existingItem);
+    if (existingItem.quantity == 0) {
+      _items.add(CartItem(product: product, quantity: 1));
     } else {
       existingItem.quantity++;
     }
@@ -33,8 +34,9 @@ class Cart {
   // カートから商品を削除する
   void removeFromCart(Product product) {
     final existingItem = _items.firstWhere(
-        (item) => item.product.id == product.id,
-        orElse: () => CartItem(product: product));
+      (item) => item.product.id == product.id,
+      orElse: () => CartItem(product: product, quantity: 0),
+    );
 
     if (existingItem.quantity > 1) {
       existingItem.quantity--;
@@ -45,7 +47,9 @@ class Cart {
 
   // カート内の商品合計金額を計算する
   double get totalPrice {
-    return _items.fold(0,
-        (total, current) => total + current.product.price * current.quantity);
+    return _items.fold(
+      0.0,
+      (total, current) => total + (current.product.price * current.quantity),
+    );
   }
 }

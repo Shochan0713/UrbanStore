@@ -1,50 +1,50 @@
-import 'package:flutter/foundation.dart';
-import 'package:urbanstore/model/oder_status.dart';
-import 'package:urbanstore/model/order.dart';
-import 'package:urbanstore/model/cart.dart';
-import 'package:urbanstore/model/user_info.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:urbanstore/model/oder_status.dart';
+// import 'package:urbanstore/model/order.dart';
+// import 'package:urbanstore/model/cart.dart';
+// import 'package:urbanstore/model/user_info.dart';
 
-class OrderViewModel extends ChangeNotifier {
-  List<Order> _orderList = [];
-  Order? _selectedOrder;
-  OrderStatus? _orderStatus;
-  String? _errorMessage;
+// class OrderViewModel extends ChangeNotifier {
+//   List<Order> _orderList = [];
+//   Order? _selectedOrder;
+//   OrderStatus? _orderStatus;
+//   String? _errorMessage;
 
-  List<Order> get orderList => _orderList;
-  Order? get selectedOrder => _selectedOrder;
-  OrderStatus? get orderStatus => _orderStatus;
-  String? get errorMessage => _errorMessage;
+//   List<Order> get orderList => _orderList;
+//   Order? get selectedOrder => _selectedOrder;
+//   OrderStatus? get orderStatus => _orderStatus;
+//   String? get errorMessage => _errorMessage;
 
-  void fetchOrderList(String userId) {
-    // 注文リスト取得処理をここに実装します
-    // 仮のデータ
-    _orderList = [
-      Order(
-          id: '1',
-          user: UserInfo(
-              id: userId,
-              name: '',
-              email: '',
-              passwordHash: '',
-              address: null,
-              phoneNumber: ''),
-          items: [],
-          totalAmount: 0,
-          status: OrderStatus.PENDING,
-          orderDate: DateTime.now())
-    ];
-    notifyListeners();
-  }
+//   void fetchOrderList(String userId) {
+//     // 注文リスト取得処理をここに実装します
+//     // 仮のデータ
+//     _orderList = [
+//       Order(
+//           id: '1',
+//           user: UserInfo(
+//               id: userId,
+//               name: '',
+//               email: '',
+//               passwordHash: '',
+//               address: null,
+//               phoneNumber: ''),
+//           items: [],
+//           totalAmount: 0,
+//           status: OrderStatus.PENDING,
+//           orderDate: DateTime.now())
+//     ];
+//     notifyListeners();
+//   }
 
-  void placeOrder(Cart cart) {
-    // 注文確定処理をここに実装します
-    _orderStatus = OrderStatus.COMPLETED;
-    notifyListeners();
-  }
+//   void placeOrder(Cart cart) {
+//     // 注文確定処理をここに実装します
+//     _orderStatus = OrderStatus.COMPLETED;
+//     notifyListeners();
+//   }
 
-  void cancelOrder(String orderId) {
-    // 注文キャンセル処理をここに実装します
-    _orderStatus = OrderStatus.CANCELLED;
-    notifyListeners();
-  }
-}
+//   void cancelOrder(String orderId) {
+//     // 注文キャンセル処理をここに実装します
+//     _orderStatus = OrderStatus.CANCELLED;
+//     notifyListeners();
+//   }
+// }

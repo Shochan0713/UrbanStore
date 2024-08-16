@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:urbanstore/model/address.dart';
 
 class UserInfo {
@@ -37,6 +38,17 @@ class UserInfo {
       passwordHash: map['passwordHash'],
       address: map['address'] != null ? Address.fromMap(map['address']) : null,
       phoneNumber: map['phoneNumber'],
+    );
+  }
+
+  static UserInfo fromFirebaseUser(User user) {
+    return UserInfo(
+      id: user.uid,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
+      passwordHash: '',
+      address: null,
+      phoneNumber: user.phoneNumber ?? '',
     );
   }
 }

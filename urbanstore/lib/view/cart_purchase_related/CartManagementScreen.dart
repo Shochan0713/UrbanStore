@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/cart.dart';
+import 'package:urbanstore/view/cart_purchase_related/PurchaseProcedureScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 
@@ -63,7 +64,13 @@ class Cartmanagementscreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('購入が完了しました！'),
                 ));
-                cart.items.clear(); // 購入後、カートをクリア
+                Future.delayed(const Duration(seconds: 2), () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Purchaseprocedurescreen(cart: cart)));
+                });
               },
             ),
           ],

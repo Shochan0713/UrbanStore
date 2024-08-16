@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart'; // 既存の FirebaseAuth クラスのインポート
 import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore クラスのインポート
 import 'package:flutter/material.dart'; // Flutter のマテリアルデザイン関連のインポート
+import 'package:urbanstore/view/order_management/OrderHistoryDisplayScreen.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart'; // 自作の HomeScreen のインポート
 import 'package:urbanstore/view/user_management/LoginScreen.dart'; // 自作の LoginScreen のインポート
 import 'package:urbanstore/view/user_management/UserInfoRegistration.dart'; // 自作の UserInfoRegistration のインポート
@@ -59,6 +60,13 @@ class _UserinfoState extends State<Userinfo> {
         _userInfo = null; // ここで問題なし
         _loading = false;
       });
+    }
+  }
+
+  void _checkUser() {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      Navigator.pushReplacementNamed(context, '/login'); // ログイン画面へリダイレクト
     }
   }
 
@@ -123,6 +131,21 @@ class _UserinfoState extends State<Userinfo> {
                       );
                     },
                     child: const Text('Home画面へ'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      try {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OrderHistoryDisplayScreen(),
+                          ),
+                        );
+                      } catch (e) {
+                        print("ログアウトに失敗しました: $e");
+                      }
+                    },
+                    child: const Text('購入履歴'),
                   ),
                   ElevatedButton(
                     onPressed: () async {
