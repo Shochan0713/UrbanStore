@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, use_build_context_synchronously, avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
@@ -23,7 +25,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -54,8 +56,9 @@ class LoginScreen extends StatelessWidget {
                               email: _emailController.text,
                               password: _passwordController.text))
                       .user;
-                  if (user != null)
+                  if (user != null) {
                     print("ログインしました　${user.email} , ${user.uid}");
+                  }
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -63,6 +66,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   );
                 } catch (e) {
+                  // ignore: duplicate_ignore
+                  // ignore: avoid_print
                   print(e);
                 }
               },
@@ -81,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UserRegistrationScreen(),
+                    builder: (context) => const UserRegistrationScreen(),
                   ),
                 );
               },

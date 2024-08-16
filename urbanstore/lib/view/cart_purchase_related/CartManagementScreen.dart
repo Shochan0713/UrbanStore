@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/cart.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
@@ -19,14 +21,14 @@ class Cartmanagementscreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Expanded(
               child: cart.items.isEmpty
-                  ? Center(child: Text('カートに商品がありません。'))
+                  ? const Center(child: Text('カートに商品がありません。'))
                   : ListView.builder(
                       itemCount: cart.items.length,
                       itemBuilder: (context, index) {
@@ -36,7 +38,7 @@ class Cartmanagementscreen extends StatelessWidget {
                           subtitle: Text(
                               '数量: ${item.quantity} | ${item.product.price * item.quantity} 円'),
                           trailing: IconButton(
-                            icon: Icon(Icons.remove),
+                            icon: const Icon(Icons.remove),
                             onPressed: () {
                               cart.removeFromCart(item.product);
                             },
@@ -45,20 +47,20 @@ class Cartmanagementscreen extends StatelessWidget {
                       },
                     ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               '合計: ${cart.totalPrice} 円',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
-              child: Text('購入する'),
+              child: const Text('購入する'),
               onPressed: () {
                 // 購入手続きの処理
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('購入が完了しました！'),
                 ));
                 cart.items.clear(); // 購入後、カートをクリア

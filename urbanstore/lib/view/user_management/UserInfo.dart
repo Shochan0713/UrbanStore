@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_print, use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart'; // 既存の FirebaseAuth クラスのインポート
 import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore クラスのインポート
 import 'package:flutter/material.dart'; // Flutter のマテリアルデザイン関連のインポート
@@ -73,7 +75,7 @@ class _UserinfoState extends State<Userinfo> {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: _loading
@@ -104,7 +106,8 @@ class _UserinfoState extends State<Userinfo> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Userinforegistrationscreen(),
+                          builder: (context) =>
+                              const Userinforegistrationscreen(),
                         ),
                       );
                     },

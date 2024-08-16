@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/user_management/RegistrationCompleateScreen.dart';
@@ -5,7 +7,7 @@ import 'package:urbanstore/viewmodel/common/app_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class UserRegistrationScreen extends StatefulWidget {
-  UserRegistrationScreen({super.key});
+  const UserRegistrationScreen({super.key});
 
   @override
   State<UserRegistrationScreen> createState() => _UserRegistrationScreenState();
@@ -27,7 +29,7 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -69,12 +71,15 @@ class _UserRegistrationScreenState extends State<UserRegistrationScreen> {
                                 email: _emailController.text,
                                 password: _passwordController.text))
                         .user;
-                    if (user != null)
+                    if (user != null) {
                       print("ユーザー登録しました${user.email} , ${user.uid}");
+                    }
                     Navigator.push(
+                      // ignore: use_build_context_synchronously
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Registrationcompleatescreen(),
+                        builder: (context) =>
+                            const Registrationcompleatescreen(),
                       ),
                     );
                   } catch (e) {

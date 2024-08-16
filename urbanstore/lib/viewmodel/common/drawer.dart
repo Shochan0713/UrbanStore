@@ -11,8 +11,8 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(padding: EdgeInsets.zero, children: [
         DrawerHeader(
           decoration: BoxDecoration(color: Colors.cyan[200]),
-          child: Center(
-            child: const Text('メニュー'),
+          child: const Center(
+            child: Text('メニュー'),
           ),
         ),
         ListTile(
@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Productsearchfunctionscreen(),
+                builder: (context) => const Productsearchfunctionscreen(),
               ),
             );
           },

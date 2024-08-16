@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:urbanstore/model/cart.dart';
-import 'package:urbanstore/model/product.dart';
 
 class CartViewModel extends ChangeNotifier {
   Cart? _cart;
-  double _totalAmount = 0.0;
+  final double _totalAmount = 0.0;
   String? _errorMessage;
 
   Cart? get cart => _cart;

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/cart.dart';
 import 'package:urbanstore/model/product.dart';
@@ -7,6 +9,7 @@ import 'package:urbanstore/viewmodel/common/app_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   HomeScreen({super.key});
 
   @override

@@ -1,7 +1,10 @@
+// ignore_for_file: file_names, prefer_const_constructors, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/cart.dart';
 import 'package:urbanstore/model/product.dart';
 import 'package:urbanstore/model/product_list.dart';
+import 'package:urbanstore/view/cart_purchase_related/CartManagementScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 
@@ -72,9 +75,16 @@ class Itemdetailscreen extends StatelessWidget {
               ),
               onPressed: () {
                 cart.addToCart(product);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('${product.name} がカートに追加されました。'),
-                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('${product.name} がカートに追加されました。'),
+                  ),
+                );
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Cartmanagementscreen(cart: cart)));
               },
             ),
           ],

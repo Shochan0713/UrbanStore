@@ -10,13 +10,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.list),
+        icon: const Icon(Icons.list),
         onPressed: () {
           Scaffold.of(context).openDrawer();
         },
       ),
       title: Center(
-          child: Text(title, style: TextStyle(fontWeight: FontWeight.bold))),
+          child:
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold))),
       // actions: actions,
       actions: [
         IconButton(
@@ -24,11 +25,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Userinfo(),
+                  builder: (context) => const Userinfo(),
                 ),
               );
             },
-            icon: Icon(Icons.person))
+            icon: const Icon(Icons.person))
       ],
       backgroundColor: Colors.cyan,
     );
@@ -38,6 +39,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
-  // TODO: implement child
   Widget get child => throw UnimplementedError();
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/cart.dart';
 import 'package:urbanstore/model/product.dart';
@@ -48,25 +50,25 @@ class _ProductsearchfunctionscreenState
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               decoration: InputDecoration(
                 hintText: '商品名で検索',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
               onChanged: (query) => updateSearchQuery(query),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
               child: filteredProducts.isEmpty
-                  ? Center(child: Text('該当する商品がありません。'))
+                  ? const Center(child: Text('該当する商品がありません。'))
                   : ListView.builder(
                       itemCount: filteredProducts.length,
                       itemBuilder: (context, index) {

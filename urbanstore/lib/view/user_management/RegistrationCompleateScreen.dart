@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
@@ -18,7 +20,7 @@ class Registrationcompleatescreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
