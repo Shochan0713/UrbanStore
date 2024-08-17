@@ -1,7 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
+import 'package:urbanstore/viewmodel/common/textbutton.dart';
 
 class Purchasecompleatescreen extends StatelessWidget {
   const Purchasecompleatescreen({super.key});
@@ -10,7 +14,6 @@ class Purchasecompleatescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Home',
         actions: [
           IconButton(
             onPressed: () {},
@@ -18,12 +21,13 @@ class Purchasecompleatescreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: null),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Center(
+            const Center(
               child: Text(
                 '購入が完了しました。',
                 style: TextStyle(
@@ -32,10 +36,12 @@ class Purchasecompleatescreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
+            CustomButton(
+              index: 1,
+              label: 'Home画面へ',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -44,7 +50,6 @@ class Purchasecompleatescreen extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Home画面へ'),
             ),
           ],
         ),

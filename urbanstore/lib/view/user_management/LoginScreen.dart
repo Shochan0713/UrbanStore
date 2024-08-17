@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:urbanstore/view/product_related/HomeScreen.dart';
 import 'package:urbanstore/view/user_management/UserRegistrationScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
+import 'package:urbanstore/viewmodel/common/textbutton.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -17,7 +19,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Login',
         actions: [
           IconButton(
             onPressed: () {},
@@ -26,73 +27,82 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
       drawer: const CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: null),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'メールアドレス',
-                border: OutlineInputBorder(),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  color: Color.fromRGBO(0, 145, 212, 0.298),
+                  blurRadius: 20,
+                  offset: Offset(0, 10))
+            ],
+          ),
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'メールアドレス',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.emailAddress,
               ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'パスワード',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16.0),
+              TextFormField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'パスワード',
+                  border: OutlineInputBorder(),
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () async {
-                try {
-                  final User? user = (await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: _emailController.text,
-                              password: _passwordController.text))
-                      .user;
-                  if (user != null) {
-                    print("ログインしました　${user.email} , ${user.uid}");
+              const SizedBox(height: 16.0),
+              CustomButton(
+                index: 0,
+                label: 'ログイン',
+                onPressed: () async {
+                  try {
+                    final User? user = (await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: _emailController.text,
+                                password: _passwordController.text))
+                        .user;
+                    if (user != null) {
+                      print("ログインしました　${user.email} , ${user.uid}");
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ),
+                    );
+                  } catch (e) {
+                    // ignore: duplicate_ignore
+                    // ignore: avoid_print
+                    print(e);
                   }
+                },
+              ),
+              const SizedBox(height: 16.0),
+              CustomButton(
+                index: 1,
+                label: '新規登録',
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
+                      builder: (context) => const UserRegistrationScreen(),
                     ),
                   );
-                } catch (e) {
-                  // ignore: duplicate_ignore
-                  // ignore: avoid_print
-                  print(e);
-                }
-              },
-              child: const Text('ログイン'),
-            ),
-            const SizedBox(height: 16.0),
-            TextButton(
-              onPressed: () {
-                // パスワードリセット画面へ遷移
-              },
-              child: const Text('パスワードを忘れた場合'),
-            ),
-            const SizedBox(height: 16.0),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UserRegistrationScreen(),
-                  ),
-                );
-              },
-              child: const Text('新規登録'),
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

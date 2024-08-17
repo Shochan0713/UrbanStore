@@ -6,6 +6,7 @@ import 'package:urbanstore/model/product.dart';
 import 'package:urbanstore/model/product_list.dart';
 import 'package:urbanstore/view/cart_purchase_related/CartManagementScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class Itemdetailscreen extends StatelessWidget {
@@ -19,7 +20,6 @@ class Itemdetailscreen extends StatelessWidget {
         productListTest.firstWhere((product) => product.id == productId);
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'UserRegistration',
         actions: [
           IconButton(
             onPressed: () {},
@@ -27,7 +27,8 @@ class Itemdetailscreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: null),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,7 +52,7 @@ class Itemdetailscreen extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             Text(
-              '\$${product.price.toStringAsFixed(2)}',
+              '${product.price.toStringAsFixed(2)}円',
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.green,

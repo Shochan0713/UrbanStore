@@ -1,19 +1,30 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:urbanstore/model/order.dart';
+import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
+import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class OrderDetailDisplayScreen extends StatelessWidget {
   final Order order;
 
+  // ignore: use_super_parameters
   const OrderDetailDisplayScreen({Key? key, required this.order})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('注文詳細'),
+      appBar: CustomAppBar(
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.home),
+          ),
+        ],
       ),
+      drawer: const CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: null),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

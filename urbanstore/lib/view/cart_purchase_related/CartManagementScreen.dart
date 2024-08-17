@@ -14,7 +14,6 @@ class Cartmanagementscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'UserRegistration',
         actions: [
           IconButton(
             onPressed: () {},
@@ -60,10 +59,6 @@ class Cartmanagementscreen extends StatelessWidget {
             ElevatedButton(
               child: const Text('購入する'),
               onPressed: () {
-                // 購入手続きの処理
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('購入が完了しました！'),
-                ));
                 Future.delayed(const Duration(seconds: 2), () {
                   Navigator.push(
                       context,

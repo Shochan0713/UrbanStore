@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:urbanstore/view/user_management/UserInfo.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
-  final String title;
   final List<Widget> actions;
-  const CustomAppBar({super.key, required this.title, required this.actions});
+  const CustomAppBar({super.key, required this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +14,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
           Scaffold.of(context).openDrawer();
         },
       ),
-      title: Center(
-          child:
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold))),
+      title: const Center(
+          child: Text('URBAN Store',
+              style: TextStyle(fontWeight: FontWeight.bold))),
       // actions: actions,
       actions: [
         IconButton(

@@ -6,7 +6,9 @@ import 'package:urbanstore/model/product.dart';
 import 'package:urbanstore/model/product_list.dart';
 import 'package:urbanstore/view/product_related/ItemDetailScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
+import 'package:urbanstore/viewmodel/common/textbutton.dart';
 
 class HomeScreen extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
@@ -21,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 0;
   final int itemsPerPage = 16;
   final cart = Cart();
+
   @override
   Widget build(BuildContext context) {
     final int startIndex = currentPage * itemsPerPage;
@@ -31,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
         productList.sublist(startIndex, endIndex);
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Home',
         actions: [
           IconButton(
             onPressed: () {},
@@ -40,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: 0),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -82,7 +85,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
+                CustomButton(
+                  index: 3,
+                  label: '戻る',
                   onPressed: currentPage > 0
                       ? () {
                           setState(() {
@@ -90,9 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         }
                       : null,
-                  child: const Text('Previous'),
                 ),
-                ElevatedButton(
+                CustomButton(
+                  index: 3,
+                  label: '次へ',
                   onPressed: endIndex < productList.length
                       ? () {
                           setState(() {
@@ -100,7 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         }
                       : null,
-                  child: const Text('Next'),
                 ),
               ],
             )

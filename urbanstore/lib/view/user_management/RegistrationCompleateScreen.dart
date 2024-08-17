@@ -12,7 +12,6 @@ class Registrationcompleatescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'UserRegistration',
         actions: [
           IconButton(
             onPressed: () {},

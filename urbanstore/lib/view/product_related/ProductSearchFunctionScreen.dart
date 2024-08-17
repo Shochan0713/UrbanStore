@@ -6,6 +6,7 @@ import 'package:urbanstore/model/product.dart';
 import 'package:urbanstore/model/product_list.dart';
 import 'package:urbanstore/view/product_related/ItemDetailScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
+import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 
 class Productsearchfunctionscreen extends StatefulWidget {
@@ -42,7 +43,6 @@ class _ProductsearchfunctionscreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Home',
         actions: [
           IconButton(
             onPressed: () {},
@@ -51,6 +51,7 @@ class _ProductsearchfunctionscreenState
         ],
       ),
       drawer: const CustomDrawer(),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: null),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
