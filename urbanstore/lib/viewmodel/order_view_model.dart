@@ -1,50 +1,31 @@
-// import 'package:flutter/foundation.dart';
-// import 'package:urbanstore/model/oder_status.dart';
-// import 'package:urbanstore/model/order.dart';
-// import 'package:urbanstore/model/cart.dart';
-// import 'package:urbanstore/model/user_info.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:urbanstore/model/order.dart' as custom_order;
 
-// class OrderViewModel extends ChangeNotifier {
-//   List<Order> _orderList = [];
-//   Order? _selectedOrder;
-//   OrderStatus? _orderStatus;
-//   String? _errorMessage;
+class OrderViewModel {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-//   List<Order> get orderList => _orderList;
-//   Order? get selectedOrder => _selectedOrder;
-//   OrderStatus? get orderStatus => _orderStatus;
-//   String? get errorMessage => _errorMessage;
+  Future<List<custom_order.Order>> fetchOrders() async {
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        throw Exception('ユーザーがログインしていません');
+      }
 
-//   void fetchOrderList(String userId) {
-//     // 注文リスト取得処理をここに実装します
-//     // 仮のデータ
-//     _orderList = [
-//       Order(
-//           id: '1',
-//           user: UserInfo(
-//               id: userId,
-//               name: '',
-//               email: '',
-//               passwordHash: '',
-//               address: null,
-//               phoneNumber: ''),
-//           items: [],
-//           totalAmount: 0,
-//           status: OrderStatus.PENDING,
-//           orderDate: DateTime.now())
-//     ];
-//     notifyListeners();
-//   }
+      String currentUserId = currentUser.uid;
 
-//   void placeOrder(Cart cart) {
-//     // 注文確定処理をここに実装します
-//     _orderStatus = OrderStatus.COMPLETED;
-//     notifyListeners();
-//   }
+      QuerySnapshot snapshot = await _firestore
+          .collection('orders')
+          .where('user.id', isEqualTo: currentUserId)
+          .get();
 
-//   void cancelOrder(String orderId) {
-//     // 注文キャンセル処理をここに実装します
-//     _orderStatus = OrderStatus.CANCELLED;
-//     notifyListeners();
-//   }
-// }
+      return snapshot.docs
+          .map((doc) => custom_order.Order.fromFireStore(doc))
+          .toList();
+    } catch (e) {
+      // ignore: avoid_print
+      print('データの取得または変換中にエラーが発生しました: $e');
+      rethrow; // エラーを再スローして上位で処理できるようにする
+    }
+  }
+}

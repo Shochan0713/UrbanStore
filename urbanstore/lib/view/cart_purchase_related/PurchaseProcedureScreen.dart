@@ -10,10 +10,12 @@ import 'package:urbanstore/model/user_info.dart' as custom_user_info;
 import 'package:urbanstore/model/payment_method.dart';
 import 'package:urbanstore/view/cart_purchase_related/PurchaseCompleateScreen.dart';
 import 'package:urbanstore/view/user_management/LoginScreen.dart';
+import 'package:urbanstore/viewmodel/cart_view_model.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
 import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
 import 'package:urbanstore/viewmodel/common/textbutton.dart';
+import 'package:urbanstore/viewmodel/order_view_model.dart';
 
 class Purchaseprocedurescreen extends StatefulWidget {
   final Cart cart;
@@ -26,17 +28,7 @@ class Purchaseprocedurescreen extends StatefulWidget {
 
 class _PurchaseprocedurescreenState extends State<Purchaseprocedurescreen> {
   PaymentMethod _selectedPaymentMethod = PaymentMethod.CREDIT_CARD;
-  Future<void> saveOrderToFirestore(custom_order.Order order) async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('orders')
-          .doc(order.id)
-          .set(order.toMap());
-    } catch (e) {
-      // ignore: avoid_print
-      print("Error saving order to Firestore: $e");
-    }
-  }
+  final CartViewModel _viewModel = CartViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +146,7 @@ class _PurchaseprocedurescreenState extends State<Purchaseprocedurescreen> {
                     status: OrderStatus.PENDING,
                     orderDate: DateTime.now(),
                   );
-                  await saveOrderToFirestore(order);
+                  await _viewModel.saveOrderToFirestore(order);
                   // 購入手続きの処理
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('購入が完了しました！'),

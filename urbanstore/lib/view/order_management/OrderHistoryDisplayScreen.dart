@@ -8,6 +8,7 @@ import 'package:urbanstore/view/order_management/OrderDetailDisplayScreen.dart';
 import 'package:urbanstore/viewmodel/common/app_bar.dart';
 import 'package:urbanstore/viewmodel/common/bottom_navigation_bar.dart';
 import 'package:urbanstore/viewmodel/common/drawer.dart';
+import 'package:urbanstore/viewmodel/order_view_model.dart';
 
 class OrderHistoryDisplayScreen extends StatefulWidget {
   const OrderHistoryDisplayScreen({super.key});
@@ -19,36 +20,36 @@ class OrderHistoryDisplayScreen extends StatefulWidget {
 
 class _OrderHistoryDisplayScreenState extends State<OrderHistoryDisplayScreen> {
   late Future<List<custom_order.Order>> _ordersFuture;
-
+  final OrderViewModel _viewModel = OrderViewModel();
   @override
   void initState() {
     super.initState();
-    _ordersFuture = _fetchOrders();
+    _ordersFuture = _viewModel.fetchOrders();
   }
 
-  Future<List<custom_order.Order>> _fetchOrders() async {
-    try {
-      final currentUser = FirebaseAuth.instance.currentUser;
-      if (currentUser == null) {
-        throw Exception('ユーザーがログインしていません');
-      }
+  // Future<List<custom_order.Order>> _fetchOrders() async {
+  //   try {
+  //     final currentUser = FirebaseAuth.instance.currentUser;
+  //     if (currentUser == null) {
+  //       throw Exception('ユーザーがログインしていません');
+  //     }
 
-      String currentUserId = currentUser.uid;
+  //     String currentUserId = currentUser.uid;
 
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
-          .collection('orders')
-          .where('user.id', isEqualTo: currentUserId)
-          .get();
+  //     QuerySnapshot snapshot = await FirebaseFirestore.instance
+  //         .collection('orders')
+  //         .where('user.id', isEqualTo: currentUserId)
+  //         .get();
 
-      return snapshot.docs
-          .map((doc) => custom_order.Order.fromFireStore(doc))
-          .toList();
-    } catch (e) {
-      // ignore: avoid_print
-      print('データの取得または変換中にエラーが発生しました: $e');
-      rethrow; // エラーを再スローして上位で処理できるようにする
-    }
-  }
+  //     return snapshot.docs
+  //         .map((doc) => custom_order.Order.fromFireStore(doc))
+  //         .toList();
+  //   } catch (e) {
+  //     // ignore: avoid_print
+  //     print('データの取得または変換中にエラーが発生しました: $e');
+  //     rethrow; // エラーを再スローして上位で処理できるようにする
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
